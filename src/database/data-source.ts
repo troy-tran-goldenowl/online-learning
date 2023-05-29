@@ -1,13 +1,16 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
+import * as dotenv from 'dotenv';
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: '1234',
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD.toString(),
+  database: process.env.DB_NAME,
   synchronize: false,
-  database: 'online-learning',
   entities: ['build/**/*.entity.js'],
   migrations: ['build/database/migrations/*.js'],
 };
