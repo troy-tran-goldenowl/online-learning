@@ -7,12 +7,9 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class UserEntity {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  username: string;
 
   @Column()
   email: string;
@@ -21,8 +18,8 @@ export class UserEntity {
   password: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }

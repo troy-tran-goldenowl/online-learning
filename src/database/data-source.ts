@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
-export const dataSourceOptions: DataSourceOptions = {
+const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
