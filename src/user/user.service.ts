@@ -44,4 +44,13 @@ export class UserService {
     Object.assign(user, updateUserDto);
     return this.repo.save(user);
   }
+
+  async delete(id: number) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return this.repo.remove(user);
+  }
 }
