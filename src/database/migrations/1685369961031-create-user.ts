@@ -1,4 +1,4 @@
-import { DatabaseTable } from 'src/constants/table.enum';
+import { DatabaseTable } from '../../constants/table.enum';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateUser1685369961031 implements MigrationInterface {
