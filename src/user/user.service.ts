@@ -11,18 +11,20 @@ import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private repo: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
   findAll() {
-    return this.repo.find();
+    return this.userRepository.find();
   }
 
   findOne(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.userRepository.findOneBy({ id });
   }
 
   findByEmail(email: string) {
-    return this.repo.findOneBy({ email });
+    return this.userRepository.findOneBy({ email });
   }
 
   async create(createUserDto: CreateUserDto) {
@@ -32,8 +34,8 @@ export class UserService {
       throw new ConflictException('Email is already taken');
     }
 
-    const user = this.repo.create(createUserDto);
-    return this.repo.save(user);
+    const user = this.userRepository.create(createUserDto);
+    return this.userRepository.save(user);
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
@@ -42,7 +44,7 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
     Object.assign(user, updateUserDto);
-    return this.repo.save(user);
+    return this.userRepository.save(user);
   }
 
   async delete(id: number) {
@@ -51,6 +53,6 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
 
-    return this.repo.remove(user);
+    return this.userRepository.remove(user);
   }
 }

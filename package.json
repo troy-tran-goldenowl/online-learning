@@ -21,8 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-commonjs -d src/database/data-source.ts",
     "migration:gen": "NODE_ENV=dev pnpm typeorm migration:generate",
-    "migration:run": "NODE_ENV=dev pnpm typeorm migration:run",
-    "migration:revert": "NODE_ENV=dev pnpm typeorm migration:revert",
+    "migration:up": "NODE_ENV=dev pnpm typeorm migration:run",
+    "migration:down": "NODE_ENV=dev pnpm typeorm migration:revert",
     "migration:create": "NODE_ENV=dev pnpm typeorm migration:create"
   },
   "dependencies": {
