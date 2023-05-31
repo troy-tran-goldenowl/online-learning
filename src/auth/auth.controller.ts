@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
 import { SignUpDto } from './dtos/sign-up.dto';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -11,13 +12,13 @@ export class AuthController {
   @Post('login')
   @Public()
   @UseGuards(AuthGuard('local'))
-  login(@Req() request) {
-    return this.authService.signIn(request.user);
+  login(@CurrentUser() user) {
+    return this.authService.signIn(user);
   }
 
   @Get('profile')
-  getProfile(@Req() request) {
-    return request.user;
+  getProfile(@CurrentUser() user) {
+    return user;
   }
 
   @Public()
