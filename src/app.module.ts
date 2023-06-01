@@ -4,6 +4,7 @@ import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
+import { InstructorModule } from './instructor/instructor.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
     DatabaseModule,
     UserModule,
     AuthModule,
+    InstructorModule,
   ],
   providers: [
     {
