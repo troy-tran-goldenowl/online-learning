@@ -21,7 +21,7 @@ export class AuthService {
     return null;
   }
 
-  signIn(user: User) {
+  generateUserWithJwt(user: User) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...rest } = user;
     return {
@@ -30,7 +30,13 @@ export class AuthService {
     };
   }
 
-  signUp(signUpDto: SignUpDto) {
-    return this.userService.create(signUpDto);
+  signIn(user: User) {
+    return this.generateUserWithJwt(user);
+  }
+
+  async signUp(signUpDto: SignUpDto) {
+    const user = await this.userService.create(signUpDto);
+
+    return this.generateUserWithJwt(user);
   }
 }
