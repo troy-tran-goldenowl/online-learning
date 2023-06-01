@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { InstructorModule } from './instructor/instructor.module';
+import { CourseModule } from './course/course.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { InstructorModule } from './instructor/instructor.module';
     UserModule,
     AuthModule,
     InstructorModule,
+    CourseModule,
   ],
   providers: [
     {

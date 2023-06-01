@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { Course } from '../../course/entities/course.entity';
 
 @Entity()
 export class Instructor {
@@ -26,4 +28,7 @@ export class Instructor {
   @OneToOne(() => User)
   @JoinColumn()
   user: User;
+
+  @OneToMany(() => Course, (course) => course.instructor)
+  courses: Course[];
 }
