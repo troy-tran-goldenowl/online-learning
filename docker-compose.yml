@@ -16,10 +16,18 @@ services:
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=${DB_NAME}
     ports:
       - '${DB_PORT}:${DB_PORT}'
     volumes: 
       - db:/var/lib/postgresql/data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./src/scripts/init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 volumes:
   db:
