@@ -22,7 +22,9 @@ export class CourseOwnerGuard implements CanActivate {
     }
 
     if (course.instructor.user.id !== user.id) {
-      throw new NotFoundException('Only course owner can access this resource');
+      throw new ForbiddenException(
+        'Only course owner can access this resource',
+      );
     }
     return true;
   }
