@@ -1,4 +1,9 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+} from '@nestjs/common';
 import { InstructorService } from 'src/instructor/instructor.service';
 import { User } from 'src/user/entities/user.entity';
 
@@ -10,6 +15,10 @@ export class InstructorGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const user: User = request.user;
     const instructor = await this.instructorService.findOneByUserId(user.id);
-    return !!instructor;
+    if (!instructor) {
+      throw new ForbiddenException('Only instructor can access this resource');
+    }
+
+    return true;
   }
 }

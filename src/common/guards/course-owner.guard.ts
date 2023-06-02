@@ -1,4 +1,9 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+} from '@nestjs/common';
 import { CourseService } from 'src/course/course.service';
 import { User } from 'src/user/entities/user.entity';
 
@@ -11,9 +16,11 @@ export class CourseOwnerGuard implements CanActivate {
     const user: User = request.user;
     const params: { id: number } = request.params;
     const course = await this.courseService.findOne(params.id);
-    if (course) {
-      return course.instructor.user.id === user.id;
+    if (!course) {
+      throw new ForbiddenException(
+        'Only course owner can access this resource',
+      );
     }
-    return false;
+    return course.instructor.user.id === user.id;
   }
 }
