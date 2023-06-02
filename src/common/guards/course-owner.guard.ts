@@ -3,6 +3,7 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
+  NotFoundException,
 } from '@nestjs/common';
 import { CourseService } from 'src/course/course.service';
 import { User } from 'src/user/entities/user.entity';
@@ -17,10 +18,12 @@ export class CourseOwnerGuard implements CanActivate {
     const params: { id: number } = request.params;
     const course = await this.courseService.findOne(params.id);
     if (!course) {
-      throw new ForbiddenException(
-        'Only course owner can access this resource',
-      );
+      throw new NotFoundException('Course not found');
     }
-    return course.instructor.user.id === user.id;
+
+    if (course.instructor.user.id !== user.id) {
+      throw new NotFoundException('Only course owner can access this resource');
+    }
+    return true;
   }
 }
