@@ -1,15 +1,8 @@
-import {
-  Inject,
-  Injectable,
-  Scope,
-  Request,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Course } from './entities/course.entity';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dtos/create-course.dto';
-import { User } from 'src/user/entities/user.entity';
 import { InstructorService } from 'src/instructor/instructor.service';
 import { UpdateCourseDto } from './dtos/update-course.dto';
 

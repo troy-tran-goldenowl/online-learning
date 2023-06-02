@@ -3,12 +3,10 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   ParseIntPipe,
   Patch,
   Post,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -19,7 +17,6 @@ import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/user/entities/user.entity';
 import { UpdateCourseDto } from './dtos/update-course.dto';
 import { CourseOwnerGuard } from 'src/common/guards/course-owner.guard';
-import { Response } from 'express';
 
 @Controller('courses')
 @UseGuards(JwtAuthGuard)

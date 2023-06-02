@@ -2,7 +2,6 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Instructor } from './entities/instructor.entity';
 import { Repository } from 'typeorm';
-import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
@@ -10,7 +9,6 @@ export class InstructorService {
   constructor(
     @InjectRepository(Instructor)
     private readonly instructorRepository: Repository<Instructor>,
-    private readonly userService: UserService,
   ) {}
 
   findOne(id: number): Promise<Instructor> {
