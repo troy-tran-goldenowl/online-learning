@@ -25,6 +25,8 @@ export class Course {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Instructor, (instructor) => instructor.courses)
+  @ManyToOne(() => Instructor, (instructor) => instructor.courses, {
+    eager: true,
+  })
   instructor: Instructor;
 }

@@ -15,6 +15,7 @@ export class CreateCourse1685605204176 implements MigrationInterface {
           {
             name: 'id',
             type: 'int',
+            isGenerated: true,
             isPrimary: true,
           },
           {

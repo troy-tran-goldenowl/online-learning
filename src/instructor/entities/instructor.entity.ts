@@ -25,7 +25,7 @@ export class Instructor {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { eager: true })
   @JoinColumn()
   user: User;
 
