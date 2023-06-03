@@ -22,12 +22,6 @@ export class CourseService {
     return this.courseRepository.findOneBy({ id });
   }
 
-  findAllByUserId(userId: number): Promise<Course[]> {
-    return this.courseRepository.findBy({
-      instructor: { user: { id: userId } },
-    });
-  }
-
   async create(courseDto: CreateCourseDto, userId: number): Promise<Course> {
     const instructor = await this.instructorService.findOneByUserId(userId);
     const course = this.courseRepository.create(courseDto);
