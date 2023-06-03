@@ -1,17 +1,17 @@
-import { Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { InstructorService } from './instructor.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { User } from 'src/user/entities/user.entity';
 import { InstructorGuard } from 'src/common/guards/instructor.guard';
-import { CourseService } from 'src/course/course.service';
+import { CourseInstructorService } from 'src/course-instructor/course-instructor.service';
 
 @Controller('instructor')
 @UseGuards(JwtAuthGuard)
 export class InstructorController {
   constructor(
     private readonly instructorService: InstructorService,
-    private readonly courseService: CourseService,
+    private readonly courseInstructorService: CourseInstructorService,
   ) {}
 
   @Post('register')
@@ -22,6 +22,6 @@ export class InstructorController {
   @UseGuards(InstructorGuard)
   @Get('courses')
   getAllCourses(@CurrentUser() user: User) {
-    return this.courseService.findAllByUserId(user.id);
+    return this.courseInstructorService.findAllCourseByUserId(user.id);
   }
 }
