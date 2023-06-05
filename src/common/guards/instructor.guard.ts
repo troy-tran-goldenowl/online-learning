@@ -14,7 +14,7 @@ export class InstructorGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const user: User = request.user;
-    const instructor = await this.instructorService.findOneByUserId(user.id);
+    const instructor = await this.instructorService.findOneByUserId(user?.id);
     if (!instructor) {
       throw new ForbiddenException('Only instructor can access this resource');
     }

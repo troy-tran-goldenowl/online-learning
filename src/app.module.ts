@@ -9,6 +9,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { InstructorModule } from 'src/instructor/instructor.module';
 import { CourseModule } from 'src/course/course.module';
 import { LessonModule } from './lesson/lesson.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { LessonModule } from './lesson/lesson.module';
     InstructorModule,
     CourseModule,
     LessonModule,
+    CloudinaryModule,
   ],
   providers: [
     {

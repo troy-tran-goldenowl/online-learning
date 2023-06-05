@@ -37,6 +37,6 @@ export class Lesson {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Course, (course) => course.lessons)
+  @ManyToOne(() => Course, (course) => course.lessons, { eager: true })
   course: Course;
 }
