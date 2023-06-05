@@ -4,7 +4,6 @@ import {
   HttpStatus,
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from './entities/lesson.entity';
@@ -14,8 +13,8 @@ import { CourseFinderService } from 'src/course/course-finder.service';
 import { LessonFilesType } from 'src/types/create-lesson-file.type';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { CloudinaryResponse } from 'src/cloudinary/cloudinary-response';
-import { UpdateCourseDto } from 'src/course/dtos/update-course.dto';
 import { User } from 'src/user/entities/user.entity';
+import { UpdateLessonDto } from './dtos/update-lession.dto';
 
 @Injectable()
 export class LessonService {
@@ -89,14 +88,14 @@ export class LessonService {
     files,
     lessonId,
   }: {
-    updateLessonDto: UpdateCourseDto;
+    updateLessonDto: UpdateLessonDto;
     files: LessonFilesType;
     lessonId: number;
   }): Promise<Lesson> {
     const lesson = await this.findOne(lessonId);
 
     const { image, video } = await this.updateFilesToCloudinary(files);
-
+    console.log({ image, video });
     if (image) {
       lesson.imageUrl = image?.url;
     }
