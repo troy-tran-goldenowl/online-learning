@@ -8,6 +8,7 @@ import { UserModule } from 'src/user/user.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { InstructorModule } from 'src/instructor/instructor.module';
 import { CourseModule } from 'src/course/course.module';
+import { LessonModule } from './lesson/lesson.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CourseModule } from 'src/course/course.module';
     AuthModule,
     InstructorModule,
     CourseModule,
+    LessonModule,
   ],
   providers: [
     {

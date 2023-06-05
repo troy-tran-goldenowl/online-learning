@@ -1,9 +1,11 @@
+import { Lesson } from '../../lesson/entities/lesson.entity';
 import { Instructor } from '../../instructor/entities/instructor.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,4 +31,7 @@ export class Course {
     eager: true,
   })
   instructor: Instructor;
+
+  @OneToMany(() => Lesson, (lesson) => lesson.course)
+  lessons: Lesson[];
 }
