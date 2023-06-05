@@ -1,73 +1,138 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Online Learning Platform
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The Online Learning Platform is a application that provides a platform for users to access educational content, enroll in courses, and track their learning progress. It allows instructors to create and manage courses, interact with students, and provide assessments and feedback.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
+- [Technologies](#technologies)
+- [ERD](#erd-entity-relationship-diagram)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Docker](#docker)
+- [Testing](#testing)
+- [Contributing](#contributing)
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Technologies
+
+This project utilizes the following technologies:
+- [TypeScript](https://https://www.typescriptlang.org) - A typed superset of JavaScript that compiles to plain JavaScript
+- [NestJS](https://nestjs.com) - A progressive Node.js framework for building efficient, scalable, and maintainable server-side applications.
+- [PostgreSQL](https://www.postgresql.org/) - A powerful, open-source relational database management system.
+- [TypeORM](https://typeorm.io/) - An ORM (Object-Relational Mapping) library for TypeScript and JavaScript that simplifies database integration.
+- [Docker](https://www.docker.com/) - A platform for automating the deployment and management of applications using containerization.
+
+## ERD (Entity-Relationship Diagram)
+``` mermaid
+  erDiagram
+    User ||--o{ Enrollment: enrolls
+    User {
+        int id PK
+        string username
+        srting email
+        string password
+    }
+    Intstructor ||--o{ Course: creates
+    Intstructor |o--|| User: is
+    Intstructor {
+        int instructor_id PK
+        int user_id FK
+        int rating
+    }
+    Course ||--o{ Enrollment: has
+    Course ||--|{ Lesson : has
+    Course ||--o{ Review : has
+    Course {
+        int id PK
+        int instructor_id FK
+        string title
+        string description
+        date created_at
+        date updated_at
+    }
+    Enrollment {
+        int id PK
+        int user_id FK
+        int course_id FK
+        date enrolled_at
+        date completed_at
+    }
+    Lesson {
+        int id PK
+        int course_id FK
+        string title
+        string content
+        string image_url
+        string video_url
+        date created_at
+        date updated_at
+    }
+    Review {
+        int id PK
+        int course_id FK
+        int user_id FK
+        int rating
+        string content
+        date created_at
+        date updated_at
+    }
+```
 
 ## Installation
 
-```bash
-$ npm install
-```
+1. Clone the repository
+2. Install dependencies using pnpm (preferred):
+   ```bash
+    pnpm install
+    ```
+    Note: If pnpm is not installed, you can install it globally by running `npm install -g pnpm`. Alternatively, you can use npm by running `npm install.`
+3. Set up the environment variables. Update the .env.dev values as required.
 
-## Running the app
+## Setup PostgreSQL
+1. Install PostgreSQL on your local machine or set up a remote PostgreSQL server.
+2. Create a new PostgreSQL database for the project.
+3. Update the .env.dev file with the following information:
+    ```
+      DB_HOST=<postgres-host>
+      DB_PORT=<postgres-port>
+      DB_USERNAME=<postgres-username>
+      DB_PASSWORD=<postgres-password>
+      DB_NAME=<postgres-database-name>
+   ```
 
-```bash
-# development
-$ npm run start
+## Usage
+1. Start the development server:
+    ```
+    pnpm start:dev
+    ```
 
-# watch mode
-$ npm run start:dev
+2. Open a web browser and navigate to `http://localhost:<port>` to access the application.
 
-# production mode
-$ npm run start:prod
-```
+## Docker
+To run the project using Docker Compose, make sure you have Docker and Docker Compose installed on your system. Then, follow these steps:
 
-## Test
+1. Build and start the Docker containers:
+  ```
+    pnpm docker:compose:up
+  ```
+2. Open a web browser and navigate to `http://localhost:<port>` to access the application.
 
-```bash
-# unit tests
-$ npm run test
+## Testing
+ ```
+  # unit tests
+  $ pnpm run test
 
-# e2e tests
-$ npm run test:e2e
+  # e2e tests
+  $ pnpm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
+  # test coverage
+  $ pnpm run test:cov
+  ```
 
-## Support
+## Contributing
+If you want to contribute to a project and make it better, your help is very welcome.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/my-feature`.
+3. Make changes and commit them: `git commit -m 'feat: Add some feature'`.
+4. Push the changes to your forked repository: `git push origin feature/my-feature.`
+5. Submit a pull request detailing your changes.
