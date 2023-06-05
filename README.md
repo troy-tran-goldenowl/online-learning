@@ -123,7 +123,7 @@ This project utilizes the following technologies:
 1. Clone the repository
 2. Install dependencies using pnpm (preferred):
    ```bash
-    pnpm install
+   $ pnpm install
    ```
    Note: If pnpm is not installed, you can install it globally by running `npm install -g pnpm`. Alternatively, you can use npm by running `npm install.`
 3. Set up the environment variables. Update the .env.dev values as required.
@@ -146,7 +146,7 @@ This project utilizes the following technologies:
 1. Start the development server:
 
    ```
-   pnpm start:dev
+   $ pnpm start:dev
    ```
 
 2. Open a web browser and navigate to `http://localhost:<port>` to access the application.
@@ -158,7 +158,7 @@ To run the project using Docker Compose, make sure you have Docker and Docker Co
 1. Build and start the Docker containers:
 
 ```
-  pnpm docker:compose:up
+  $ pnpm docker:compose:up
 ```
 
 2. Open a web browser and navigate to `http://localhost:<port>` to access the application.
