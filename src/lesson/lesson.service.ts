@@ -1,8 +1,10 @@
 import {
+  ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from './entities/lesson.entity';
@@ -13,6 +15,7 @@ import { LessonFilesType } from 'src/types/create-lesson-file.type';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { CloudinaryResponse } from 'src/cloudinary/cloudinary-response';
 import { UpdateCourseDto } from 'src/course/dtos/update-course.dto';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class LessonService {
@@ -35,10 +38,17 @@ export class LessonService {
   async create(
     createLessonDto: CreateLessonDto,
     files: LessonFilesType,
+    user: User,
   ): Promise<Lesson> {
     const course = await this.courseFinderService.findCourseById(
       createLessonDto.courseId,
     );
+
+    if (course.instructor?.user?.id !== user.id) {
+      throw new ForbiddenException(
+        'Only course owner can access this resource',
+      );
+    }
 
     const lesson = this.lessonRepository.create(createLessonDto);
 

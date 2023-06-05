@@ -19,6 +19,8 @@ import { InstructorGuard } from 'src/common/guards/instructor.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UpdateLessonDto } from './dtos/update-lession.dto';
 import { LessonOwnerGuard } from './guards/lesson-owner.guard';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { User } from 'src/user/entities/user.entity';
 
 @Controller('lesson')
 @UseGuards(JwtAuthGuard, InstructorGuard)
@@ -36,8 +38,9 @@ export class LessonController {
     @Body() createLessonDto: CreateLessonDto,
     @UploadedFiles()
     files: LessonFilesType,
+    @CurrentUser() user: User,
   ) {
-    return this.lessonService.create(createLessonDto, files);
+    return this.lessonService.create(createLessonDto, files, user);
   }
 
   @Patch(':id')
