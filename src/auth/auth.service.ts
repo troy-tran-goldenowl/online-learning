@@ -4,6 +4,7 @@ import { UserService } from 'src/user/user.service';
 import { SignUpDto } from './dtos/sign-up.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/user/entities/user.entity';
+import { UserWithToken } from 'src/types/user.type';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string) {
+  async validateUser(email: string, password: string): Promise<User> {
     const user = await this.userService.findByEmail(email);
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
@@ -21,16 +22,15 @@ export class AuthService {
     return null;
   }
 
-  signIn(user: User) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...rest } = user;
+  signIn(user: User): UserWithToken {
+    const payload = { ...user };
     return {
-      ...rest,
-      access_token: this.jwtService.sign(rest),
+      user,
+      access_token: this.jwtService.sign(payload),
     };
   }
 
-  signUp(signUpDto: SignUpDto) {
+  signUp(signUpDto: SignUpDto): Promise<User> {
     return this.userService.create(signUpDto);
   }
 }

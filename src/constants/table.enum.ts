@@ -1,3 +1,5 @@
 export enum DatabaseTable {
   User = 'user',
+  Instructor = 'instructor',
+  Course = 'course',
 }

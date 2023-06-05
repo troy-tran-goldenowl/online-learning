@@ -1,9 +1,13 @@
 import { ClassSerializerInterceptor, Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
-import { UserModule } from './user/user.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+
+// Modules
+import { DatabaseModule } from 'src/database/database.module';
+import { UserModule } from 'src/user/user.module';
+import { AuthModule } from 'src/auth/auth.module';
+import { InstructorModule } from 'src/instructor/instructor.module';
+import { CourseModule } from 'src/course/course.module';
 
 @Module({
   imports: [
@@ -14,6 +18,8 @@ import { AuthModule } from './auth/auth.module';
     DatabaseModule,
     UserModule,
     AuthModule,
+    InstructorModule,
+    CourseModule,
   ],
   providers: [
     {
