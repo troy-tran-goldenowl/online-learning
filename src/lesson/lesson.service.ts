@@ -95,7 +95,6 @@ export class LessonService {
     const lesson = await this.findOne(lessonId);
 
     const { image, video } = await this.updateFilesToCloudinary(files);
-    console.log({ image, video });
     if (image) {
       lesson.imageUrl = image?.url;
     }
