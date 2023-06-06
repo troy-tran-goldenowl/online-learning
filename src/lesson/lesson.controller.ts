@@ -34,6 +34,12 @@ export class LessonController {
     return this.lessonService.findOne(id);
   }
 
+  @Get('/courses/:id')
+  @UseGuards(EnrollmentGuard)
+  findLessonsByCourseId(@Param('id', ParseIntPipe) courseId: number) {
+    return this.lessonService.findLessonsByCourseId(courseId);
+  }
+
   @Post()
   @UseInterceptors(UploadLessonFilesInterceptor)
   createLesson(

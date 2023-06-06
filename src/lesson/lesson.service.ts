@@ -34,6 +34,10 @@ export class LessonService {
     return lesson;
   }
 
+  findLessonsByCourseId(courseId: number) {
+    return this.lessonRepository.findBy({ course: { id: courseId } });
+  }
+
   async create(
     createLessonDto: CreateLessonDto,
     files: LessonFilesType,
