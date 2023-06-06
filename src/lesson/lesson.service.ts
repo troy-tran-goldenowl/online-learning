@@ -39,10 +39,13 @@ export class LessonService {
     courseId: number,
     page: number,
     limit: number,
+    title,
   ): Promise<Pagination<Lesson>> {
     const queryBuilder = this.lessonRepository
       .createQueryBuilder('lesson')
-      .where('lesson.course = :courseId', { courseId });
+      .where('lesson.course = :courseId', { courseId })
+      .andWhere('lesson.title like :title', { title: `%${title}%` });
+
     return paginate(queryBuilder, { page, limit });
   }
 

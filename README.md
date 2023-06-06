@@ -100,7 +100,9 @@ This project utilizes the following technologies:
 ## Feature Checklist
 
 1.  Authentication:
+
     - [x] Login and signup functionality with JWT authentication.
+
 2.  User Profile:
 
     - [x] Ability to retrieve user profile information.
@@ -137,9 +139,14 @@ This project utilizes the following technologies:
     - [x] Enable users to leave reviews for instructors.
 
 10. Pagination
-    - [ ] Implement pagination for course by instructor endpoint
-    - [ ] Implement pagination for get all course endpoint
-    - [ ] Implement pagination for get lessons by courseId endpoint
+
+    - [x] Implement pagination for course by instructor endpoint
+    - [x] Implement pagination for get all course endpoint
+    - [x] Implement pagination for get lessons by courseId endpoint
+
+11. Search
+    - [ ] Search course by title
+    - [x] Search lesson by title
 
 ## Installation
 

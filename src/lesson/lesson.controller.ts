@@ -42,8 +42,14 @@ export class LessonController {
     @Param('id', ParseIntPipe) courseId: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query('title', new DefaultValuePipe('')) title: string,
   ) {
-    return this.lessonService.findLessonsByCourseId(courseId, page, limit);
+    return this.lessonService.findLessonsByCourseId(
+      courseId,
+      page,
+      limit,
+      title,
+    );
   }
 
   @Post()
