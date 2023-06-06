@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { Course } from '../../course/entities/course.entity';
+import { InstructorRating } from '../../rating/entities/intrusctor-rating.entity';
 
 @Entity()
 export class Instructor {
@@ -31,4 +32,7 @@ export class Instructor {
 
   @OneToMany(() => Course, (course) => course.instructor)
   courses: Course[];
+
+  @OneToMany(() => InstructorRating, (rating) => rating.instructor)
+  ratings: InstructorRating[];
 }
