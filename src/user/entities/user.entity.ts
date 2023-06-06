@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Enrollment } from '../../enrollment/entities/enrollment.entity';
+import { CourseRating } from '../../rating/entities/course-rating.entity';
 
 @Entity()
 export class User {
@@ -31,6 +32,9 @@ export class User {
 
   @OneToMany(() => Enrollment, (enrollment) => enrollment.user)
   enrollments: Enrollment[];
+
+  @OneToMany(() => CourseRating, (rating) => rating.user)
+  courseRatings: CourseRating[];
 
   @BeforeInsert()
   async hashPassword() {
