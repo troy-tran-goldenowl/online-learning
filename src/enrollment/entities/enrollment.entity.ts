@@ -3,8 +3,6 @@ import { User } from '../../user/entities/user.entity';
 import {
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -16,11 +14,9 @@ export class Enrollment {
   id: number;
 
   @ManyToOne(() => User, (user) => user.enrollments)
-  @JoinColumn()
   user: User;
 
-  @ManyToMany(() => Course, (course) => course.enrollments)
-  @JoinColumn()
+  @ManyToOne(() => Course, (course) => course.enrollments)
   course: Course;
 
   @CreateDateColumn()
