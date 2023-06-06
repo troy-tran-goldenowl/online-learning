@@ -6,6 +6,7 @@ import { Lesson } from './entities/lesson.entity';
 import { CourseModule } from 'src/course/course.module';
 import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 import { InstructorModule } from 'src/instructor/instructor.module';
+import { EnrollmentModule } from 'src/enrollment/enrollment.module';
 
 @Module({
   providers: [LessonService],
@@ -15,6 +16,7 @@ import { InstructorModule } from 'src/instructor/instructor.module';
     CourseModule,
     CloudinaryModule,
     InstructorModule,
+    EnrollmentModule,
   ],
 })
 export class LessonModule {}

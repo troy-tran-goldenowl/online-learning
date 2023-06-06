@@ -21,12 +21,14 @@ import { UpdateLessonDto } from './dtos/update-lession.dto';
 import { LessonOwnerGuard } from './guards/lesson-owner.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/user/entities/user.entity';
+import { EnrollmentGuard } from 'src/common/guards/enrollment.guard';
 
 @Controller('lesson')
 @UseGuards(JwtAuthGuard, InstructorGuard)
 export class LessonController {
   constructor(private readonly lessonService: LessonService) {}
 
+  @UseGuards(EnrollmentGuard)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.lessonService.findOne(id);
