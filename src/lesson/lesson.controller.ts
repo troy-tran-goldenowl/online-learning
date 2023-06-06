@@ -1,12 +1,14 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Param,
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -36,8 +38,12 @@ export class LessonController {
 
   @Get('/courses/:id')
   @UseGuards(EnrollmentGuard)
-  findLessonsByCourseId(@Param('id', ParseIntPipe) courseId: number) {
-    return this.lessonService.findLessonsByCourseId(courseId);
+  findLessonsByCourseId(
+    @Param('id', ParseIntPipe) courseId: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+  ) {
+    return this.lessonService.findLessonsByCourseId(courseId, page, limit);
   }
 
   @Post()

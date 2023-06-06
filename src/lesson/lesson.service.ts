@@ -15,6 +15,7 @@ import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { CloudinaryResponse } from 'src/cloudinary/cloudinary-response';
 import { User } from 'src/user/entities/user.entity';
 import { UpdateLessonDto } from './dtos/update-lession.dto';
+import { Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class LessonService {
@@ -34,8 +35,15 @@ export class LessonService {
     return lesson;
   }
 
-  findLessonsByCourseId(courseId: number) {
-    return this.lessonRepository.findBy({ course: { id: courseId } });
+  findLessonsByCourseId(
+    courseId: number,
+    page: number,
+    limit: number,
+  ): Promise<Pagination<Lesson>> {
+    const queryBuilder = this.lessonRepository
+      .createQueryBuilder('lesson')
+      .where('lesson.course = :courseId', { courseId });
+    return paginate(queryBuilder, { page, limit });
   }
 
   async create(
