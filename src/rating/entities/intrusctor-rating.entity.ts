@@ -9,8 +9,9 @@ import {
 } from 'typeorm';
 import { Instructor } from '../../instructor/entities/instructor.entity';
 import { User } from '../../user/entities/user.entity';
+import { DatabaseTable } from 'src/constants/table.enum';
 
-@Entity()
+@Entity({ name: DatabaseTable.InstructorRating })
 export class InstructorRating {
   @PrimaryGeneratedColumn()
   id: number;
