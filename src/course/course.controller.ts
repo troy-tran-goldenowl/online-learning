@@ -30,8 +30,9 @@ export class CourseController {
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query('title', new DefaultValuePipe('')) title: string,
   ) {
-    return this.courseService.findAll({ page, limit });
+    return this.courseService.findAll({ page, limit, title });
   }
 
   @Get(':id')

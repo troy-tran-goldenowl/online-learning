@@ -145,7 +145,7 @@ This project utilizes the following technologies:
     - [x] Implement pagination for get lessons by courseId endpoint
 
 11. Search
-    - [ ] Search course by title
+    - [x] Search course by title
     - [x] Search lesson by title
 
 ## Installation

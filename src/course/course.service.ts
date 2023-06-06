@@ -15,8 +15,11 @@ export class CourseService {
     private readonly instructorService: InstructorService,
   ) {}
 
-  findAll({ page, limit }): Promise<Pagination<Course>> {
-    return paginate<Course>(this.courseRepository, { page, limit });
+  findAll({ page, limit, title }): Promise<Pagination<Course>> {
+    const queryBuilder = this.courseRepository
+      .createQueryBuilder('course')
+      .where('course.title like :title', { title: `%${title}%` });
+    return paginate<Course>(queryBuilder, { page, limit });
   }
 
   findOne(id: number): Promise<Course> {
