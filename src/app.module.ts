@@ -10,6 +10,7 @@ import { InstructorModule } from 'src/instructor/instructor.module';
 import { CourseModule } from 'src/course/course.module';
 import { LessonModule } from './lesson/lesson.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { EnrollmentModule } from './enrollment/enrollment.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     CourseModule,
     LessonModule,
     CloudinaryModule,
+    EnrollmentModule,
   ],
   providers: [
     {
