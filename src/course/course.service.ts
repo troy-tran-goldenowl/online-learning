@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dtos/create-course.dto';
 import { InstructorService } from 'src/instructor/instructor.service';
 import { UpdateCourseDto } from './dtos/update-course.dto';
+import { Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class CourseService {
@@ -14,8 +15,8 @@ export class CourseService {
     private readonly instructorService: InstructorService,
   ) {}
 
-  findAll(): Promise<Course[]> {
-    return this.courseRepository.find();
+  findAll({ page, limit }): Promise<Pagination<Course>> {
+    return paginate<Course>(this.courseRepository, { page, limit });
   }
 
   findOne(id: number): Promise<Course> {
