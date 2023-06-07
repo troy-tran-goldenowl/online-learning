@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Patch,
@@ -29,8 +30,12 @@ export class CourseController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.courseService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const course = await this.courseService.findOne(id);
+    if (!course) {
+      throw new NotFoundException('Course not found');
+    }
+    return course;
   }
 
   @Post()
