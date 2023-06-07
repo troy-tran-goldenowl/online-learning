@@ -66,7 +66,7 @@ export class LessonService {
 
     const lesson = this.lessonRepository.create(createLessonDto);
 
-    const { image, video } = await this.updateFilesToCloudinary(files);
+    const { image, video } = await this.updateFilesToCloudinary(files, user.id);
     lesson.imageUrl = image?.url;
     lesson.videoUrl = video?.url;
     lesson.course = course;
@@ -74,7 +74,10 @@ export class LessonService {
     return this.lessonRepository.save(lesson);
   }
 
-  private async updateFilesToCloudinary(files: LessonFilesType): Promise<{
+  private async updateFilesToCloudinary(
+    files: LessonFilesType,
+    userId: number,
+  ): Promise<{
     video?: CloudinaryResponse;
     image?: CloudinaryResponse;
   }> {
@@ -82,10 +85,14 @@ export class LessonService {
       const uploadPromises: Promise<CloudinaryResponse>[] = [];
 
       if (files.image?.length > 0) {
-        uploadPromises.push(this.cloudinaryService.uploadFile(files.image[0]));
+        uploadPromises.push(
+          this.cloudinaryService.uploadFile(files.image[0], userId),
+        );
       }
       if (files.video?.length > 0) {
-        uploadPromises.push(this.cloudinaryService.uploadFile(files.video[0]));
+        uploadPromises.push(
+          this.cloudinaryService.uploadFile(files.video[0], userId),
+        );
       }
 
       const [image, video] = await Promise.all(uploadPromises);
@@ -102,14 +109,16 @@ export class LessonService {
     updateLessonDto,
     files,
     lessonId,
+    userId,
   }: {
     updateLessonDto: UpdateLessonDto;
     files: LessonFilesType;
     lessonId: number;
+    userId: number;
   }): Promise<Lesson> {
     const lesson = await this.findOne(lessonId);
 
-    const { image, video } = await this.updateFilesToCloudinary(files);
+    const { image, video } = await this.updateFilesToCloudinary(files, userId);
     if (image) {
       lesson.imageUrl = image?.url;
     }

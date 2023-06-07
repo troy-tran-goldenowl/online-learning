@@ -70,12 +70,14 @@ export class LessonController {
     @Body() updateLessonDto: UpdateLessonDto,
     @UploadedFiles()
     files: LessonFilesType,
+    @CurrentUser() user: User,
     @Param('id', ParseIntPipe) lessonId: number,
   ) {
     return this.lessonService.update({
       updateLessonDto,
       files,
       lessonId,
+      userId: user.id,
     });
   }
 
