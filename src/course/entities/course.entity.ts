@@ -1,20 +1,19 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
 import { Lesson } from '../../lesson/entities/lesson.entity';
 import { Instructor } from '../../instructor/entities/instructor.entity';
 import { Enrollment } from '../../enrollment/entities/enrollment.entity';
 import { CourseRating } from '../../rating/entities/course-rating.entity';
+import { BaseEntity } from '../../common/entities/base.entity';
 
 @Entity()
-export class Course {
+export class Course extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,12 +22,6 @@ export class Course {
 
   @Column()
   description: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @ManyToOne(() => Instructor, (instructor) => instructor.courses, {
     eager: true,

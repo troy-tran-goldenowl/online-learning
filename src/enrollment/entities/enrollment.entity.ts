@@ -1,15 +1,10 @@
+import { BaseEntity } from '../../common/entities/base.entity';
 import { Course } from '../../course/entities/course.entity';
 import { User } from '../../user/entities/user.entity';
-import {
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Enrollment {
+export class Enrollment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,10 +13,4 @@ export class Enrollment {
 
   @ManyToOne(() => Course, (course) => course.enrollments)
   course: Course;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }

@@ -4,15 +4,14 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Instructor } from '../../instructor/entities/instructor.entity';
 import { User } from '../../user/entities/user.entity';
-import { DatabaseTable } from 'src/constants/table.enum';
+import { DatabaseTable } from '../../constants/table.enum';
+import { BaseEntity } from '../../common/entities/base.entity';
 
 @Entity({ name: DatabaseTable.InstructorRating })
-export class InstructorRating {
+export class InstructorRating extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,10 +25,4 @@ export class InstructorRating {
   @ManyToOne(() => User, (user) => user.instructorRatings)
   @JoinColumn()
   user: User;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }
