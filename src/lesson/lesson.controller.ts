@@ -55,7 +55,7 @@ export class LessonController {
 
   @Post()
   @UseInterceptors(UploadLessonFilesInterceptor)
-  @UseGuards(InstructorGuard, CourseOwnerGuard)
+  @UseGuards(InstructorGuard)
   createLesson(
     @Body() createLessonDto: CreateLessonDto,
     @UploadedFiles()
