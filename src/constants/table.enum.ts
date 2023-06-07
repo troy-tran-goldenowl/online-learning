@@ -3,4 +3,7 @@ export enum DatabaseTable {
   Instructor = 'instructor',
   Course = 'course',
   Lesson = 'lesson',
+  Enrollment = 'enrollment',
+  CourseRating = 'course-rating',
+  InstructorRating = 'instructor-rating',
 }

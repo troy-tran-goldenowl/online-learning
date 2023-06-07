@@ -1,5 +1,3 @@
-import { Lesson } from '../../lesson/entities/lesson.entity';
-import { Instructor } from '../../instructor/entities/instructor.entity';
 import {
   Column,
   CreateDateColumn,
@@ -9,6 +7,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { Lesson } from '../../lesson/entities/lesson.entity';
+import { Instructor } from '../../instructor/entities/instructor.entity';
+import { Enrollment } from '../../enrollment/entities/enrollment.entity';
+import { CourseRating } from '../../rating/entities/course-rating.entity';
 
 @Entity()
 export class Course {
@@ -34,4 +37,10 @@ export class Course {
 
   @OneToMany(() => Lesson, (lesson) => lesson.course)
   lessons: Lesson[];
+
+  @OneToMany(() => Enrollment, (enrollment) => enrollment.course)
+  enrollments: Enrollment[];
+
+  @OneToMany(() => CourseRating, (rating) => rating.course)
+  ratings: CourseRating[];
 }

@@ -8,8 +8,10 @@ import { UserModule } from 'src/user/user.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { InstructorModule } from 'src/instructor/instructor.module';
 import { CourseModule } from 'src/course/course.module';
-import { LessonModule } from './lesson/lesson.module';
-import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { LessonModule } from 'src/lesson/lesson.module';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { EnrollmentModule } from 'src/enrollment/enrollment.module';
+import { RatingModule } from 'src/rating/rating.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     CourseModule,
     LessonModule,
     CloudinaryModule,
+    EnrollmentModule,
+    RatingModule,
   ],
   providers: [
     {

@@ -10,6 +10,7 @@ The Online Learning Platform is a application that provides a platform for users
 - [Installation](#installation)
 - [Docker](#docker)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Contributing](#contributing)
 
 ## Technologies
@@ -33,16 +34,19 @@ This project utilizes the following technologies:
         srting email
         string password
     }
+
+
     Intstructor ||--o{ Course: creates
-    Intstructor |o--|| User: is
+    Intstructor ||--o| User: is
+    Intstructor ||--o{ InstructorReview : has
     Intstructor {
         int instructor_id PK
         int user_id FK
-        int rating
     }
+
     Course ||--o{ Enrollment: has
     Course ||--|{ Lesson : has
-    Course ||--o{ Review : has
+    Course ||--o{ CourseReview : has
     Course {
         int id PK
         int instructor_id FK
@@ -51,6 +55,8 @@ This project utilizes the following technologies:
         date created_at
         date updated_at
     }
+
+
     Enrollment {
         int id PK
         int user_id FK
@@ -58,6 +64,7 @@ This project utilizes the following technologies:
         date enrolled_at
         date completed_at
     }
+
     Lesson {
         int id PK
         int course_id FK
@@ -68,9 +75,20 @@ This project utilizes the following technologies:
         date created_at
         date updated_at
     }
-    Review {
+
+    CourseReview {
         int id PK
         int course_id FK
+        int user_id FK
+        int rating
+        string content
+        date created_at
+        date updated_at
+    }
+
+    InstructorReview {
+        int id PK
+        int instructor_id FK
         int user_id FK
         int rating
         string content
@@ -82,7 +100,9 @@ This project utilizes the following technologies:
 ## Feature Checklist
 
 1.  Authentication:
+
     - [x] Login and signup functionality with JWT authentication.
+
 2.  User Profile:
 
     - [x] Ability to retrieve user profile information.
@@ -104,19 +124,29 @@ This project utilizes the following technologies:
 
     - [x] CRUD functionality for lessons within a course.
     - [x] Ability to upload and store images and videos for lessons (using Cloudinary).
-    - [ ] Only users enrolled in a course can access the lessons within that course.
+    - [x] Only users enrolled in a course can access the lessons within that course.
 
 7.  User Enrollment:
 
-    - [ ] Allow users to enroll in courses.
+    - [x] Allow users to enroll in courses.
 
 8.  Course Reviews:
 
-    - [ ] Enable users to leave reviews for courses.
+    - [x] Enable users to leave reviews for courses.
 
 9.  Instructor Reviews:
 
-    - [ ] Enable users to leave reviews for instructors.
+    - [x] Enable users to leave reviews for instructors.
+
+10. Pagination
+
+    - [x] Implement pagination for course by instructor endpoint
+    - [x] Implement pagination for get all course endpoint
+    - [x] Implement pagination for get lessons by courseId endpoint
+
+11. Search
+    - [x] Search course by title
+    - [x] Search lesson by title
 
 ## Installation
 
@@ -162,6 +192,14 @@ To run the project using Docker Compose, make sure you have Docker and Docker Co
 ```
 
 2. Open a web browser and navigate to `http://localhost:<port>` to access the application.
+
+## Testing
+
+To run unit testing in the project:
+
+```
+  $ pnpm test
+```
 
 ## Contributing
 
