@@ -10,6 +10,7 @@ The Online Learning Platform is a application that provides a platform for users
 - [Installation](#installation)
 - [Docker](#docker)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Contributing](#contributing)
 
 ## Technologies
@@ -36,12 +37,11 @@ This project utilizes the following technologies:
 
 
     Intstructor ||--o{ Course: creates
-    Intstructor |o--|| User: is
+    Intstructor ||--o| User: is
     Intstructor ||--o{ InstructorReview : has
     Intstructor {
         int instructor_id PK
         int user_id FK
-        int rating
     }
 
     Course ||--o{ Enrollment: has
@@ -192,6 +192,14 @@ To run the project using Docker Compose, make sure you have Docker and Docker Co
 ```
 
 2. Open a web browser and navigate to `http://localhost:<port>` to access the application.
+
+## Testing
+
+To run unit testing in the project:
+
+```
+  $ pnpm test
+```
 
 ## Contributing
 
