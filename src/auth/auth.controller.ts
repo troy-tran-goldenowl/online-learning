@@ -15,12 +15,6 @@ export class AuthController {
     return this.authService.signIn(user);
   }
 
-  @Get('profile')
-  @UseGuards(JwtAuthGuard)
-  getProfile(@CurrentUser() user) {
-    return user;
-  }
-
   @Post('signup')
   signup(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto);
