@@ -3,8 +3,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   BeforeInsert,
   OneToMany,
 } from 'typeorm';
@@ -12,9 +10,10 @@ import * as bcrypt from 'bcrypt';
 import { Enrollment } from '../../enrollment/entities/enrollment.entity';
 import { CourseRating } from '../../rating/entities/course-rating.entity';
 import { InstructorRating } from '../../rating/entities/intrusctor-rating.entity';
+import { BaseEntity } from '../../common/entities/base.entity';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,12 +23,6 @@ export class User {
   @Column()
   @Exclude()
   password: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @OneToMany(() => Enrollment, (enrollment) => enrollment.user)
   enrollments: Enrollment[];

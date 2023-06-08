@@ -24,9 +24,10 @@ import { LessonOwnerGuard } from './guards/lesson-owner.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/user/entities/user.entity';
 import { EnrollmentGuard } from 'src/common/guards/enrollment.guard';
+import { CourseOwnerGuard } from 'src/common/guards/course-owner.guard';
 
 @Controller('lesson')
-@UseGuards(JwtAuthGuard, InstructorGuard)
+@UseGuards(JwtAuthGuard)
 export class LessonController {
   constructor(private readonly lessonService: LessonService) {}
 
@@ -54,6 +55,7 @@ export class LessonController {
 
   @Post()
   @UseInterceptors(UploadLessonFilesInterceptor)
+  @UseGuards(InstructorGuard)
   createLesson(
     @Body() createLessonDto: CreateLessonDto,
     @UploadedFiles()
@@ -70,12 +72,14 @@ export class LessonController {
     @Body() updateLessonDto: UpdateLessonDto,
     @UploadedFiles()
     files: LessonFilesType,
+    @CurrentUser() user: User,
     @Param('id', ParseIntPipe) lessonId: number,
   ) {
     return this.lessonService.update({
       updateLessonDto,
       files,
       lessonId,
+      userId: user.id,
     });
   }
 

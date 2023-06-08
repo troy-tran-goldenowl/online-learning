@@ -12,6 +12,7 @@ import { LessonModule } from 'src/lesson/lesson.module';
 import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 import { EnrollmentModule } from 'src/enrollment/enrollment.module';
 import { RatingModule } from 'src/rating/rating.module';
+import { UserEnrollmentModule } from 'src/user-enrollment/user-enrollment.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { RatingModule } from 'src/rating/rating.module';
     CloudinaryModule,
     EnrollmentModule,
     RatingModule,
+    UserEnrollmentModule,
   ],
   providers: [
     {

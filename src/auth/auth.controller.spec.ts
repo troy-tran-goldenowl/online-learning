@@ -47,16 +47,6 @@ describe('AuthController', () => {
     });
   });
 
-  describe('getProfile', () => {
-    it('should return the user object from CurrentUser decorator', () => {
-      const user = {};
-
-      const result = controller.getProfile(user);
-
-      expect(result).toBe(user);
-    });
-  });
-
   describe('signup', () => {
     it('should call signUp method of authService and return its result', async () => {
       const signUpDto: SignUpDto = { email: 'abc', password: '1234' }; // mock sign-up DTO

@@ -1,30 +1,23 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { Course } from '../../course/entities/course.entity';
 import { InstructorRating } from '../../rating/entities/intrusctor-rating.entity';
+import { BaseEntity } from '../../common/entities/base.entity';
 
 @Entity()
-export class Instructor {
+export class Instructor extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ default: 0 })
   rating: number;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @OneToOne(() => User, { eager: true })
   @JoinColumn()

@@ -129,6 +129,7 @@ This project utilizes the following technologies:
 7.  User Enrollment:
 
     - [x] Allow users to enroll in courses.
+    - [x] Get all courses enrolled by user
 
 8.  Course Reviews:
 

@@ -1,15 +1,9 @@
+import { BaseEntity } from '../../common/entities/base.entity';
 import { Course } from '../../course/entities/course.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Lesson {
+export class Lesson extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,12 +24,6 @@ export class Lesson {
 
   @Column({ name: 'video_url', nullable: true })
   videoUrl: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @ManyToOne(() => Course, (course) => course.lessons, { eager: true })
   course: Course;
